@@ -260,6 +260,19 @@ export default function App() {
   const [fetchingCourts, setFetchingCourts] = useState(false);
   const [eloDelta, setEloDelta] = useState(0);
 
+  // Migration automatique : mettre à jour le nom si c'est encore l'ancien
+  useEffect(() => {
+    if (currentUser && currentUser.name === 'Kylian W.') {
+      setCurrentUser({
+        ...currentUser,
+        name: 'Dydy P.',
+        handle: '@dydy_player',
+        avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=Dydy&backgroundColor=b6e3f4'
+      });
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []); // Exécuter une seule fois au montage
+
   const chatEndRef = useRef(null);
 
   // Fetch de l'historique ELO depuis Supabase
